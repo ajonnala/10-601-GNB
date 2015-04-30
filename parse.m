@@ -1,8 +1,8 @@
-function [xVal,yVal] = parse(output,facFlag,studFlag)
-typeLoc = 14;
+function [xVal,yVal] = parse(output)
+typeLoc = 1;
 typeCol = output(:,typeLoc);
-trainFacultyIndic = typeCol == facFlag;
-trainStudentIndic = typeCol == studFlag;
+trainFacultyIndic = typeCol == 0; 
+trainStudentIndic = typeCol == 1;
 trainFacRows = output(trainFacultyIndic,:);
 trainStudRows = output(trainStudentIndic,:);
 xVal = cat(1,trainFacRows,trainStudRows);
