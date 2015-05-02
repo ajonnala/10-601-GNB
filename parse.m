@@ -1,8 +1,10 @@
 function [xVal,yVal] = parse(output)
 typeLoc = 1;
 typeCol = output(:,typeLoc);
-trainFacultyIndic = typeCol == 0; 
-trainStudentIndic = typeCol == 1;
+trainFacultyIndic = typeCol == 1; 
+trainStudentIndic = typeCol == 0;
+sum(trainFacultyIndic)
+sum(trainStudentIndic)
 trainFacRows = output(trainFacultyIndic,:);
 trainStudRows = output(trainStudentIndic,:);
 xVal = cat(1,trainFacRows,trainStudRows);

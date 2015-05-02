@@ -1,0 +1,12 @@
+function [err] = test(data,frac,x)
+data(1,:) =[];
+[x,y] = parse(data);
+[xTe,xTr,yTr,yTe,numF,numS] = splitData(x,y,frac);
+[tdF,tdS] = tdidf(xTr,yTr,numF,numS);
+tf = sum(tdF,1);
+tS = sum(tdS,1);
+[xTrain,yTrain,xTest,yTest] = filter(tf,tS,xTr,yTr,xTe,yTe,x);
+D = NB_XGivenY(xTrain, yTrain);
+p = NB_YPrior(yTrain);
+yHatTest = NB_Classify(D, p, xTest);
+err = ClassificationError(yHatTest, yTest)
